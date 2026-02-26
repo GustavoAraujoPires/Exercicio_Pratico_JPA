@@ -1,13 +1,32 @@
 🚀 Sistema de Pedidos – API REST com Spring Boot + JPA + Docker
-📌 Descrição
 
-Este projeto consiste em uma API REST desenvolvida com Java e Spring Boot, utilizando Spring Data JPA para persistência de dados e PostgreSQL como banco de dados, executado em um container Docker.
+Bem-vindo ao projeto Sistema de Pedidos 👋
 
-O sistema permite o gerenciamento de Clientes e Pedidos, aplicando relacionamento entre entidades e regras básicas de negócio.
+Uma API REST desenvolvida com Java + Spring Boot, utilizando Spring Data JPA para persistência e PostgreSQL rodando em container Docker.
 
-🎯 Objetivo
+O sistema permite o gerenciamento de:
 
-O objetivo do projeto foi praticar:
+👤 Clientes
+
+📦 Pedidos
+
+Aplicando relacionamento entre entidades e regras básicas de negócio.
+
+📌 Sobre o Projeto
+
+Este projeto foi desenvolvido com foco em prática real de backend, simulando uma estrutura comum em aplicações corporativas.
+
+Ele envolve:
+
+✔ Persistência com JPA
+✔ Relacionamento entre tabelas
+✔ Banco relacional
+✔ Ambiente isolado com Docker
+✔ Organização em camadas
+
+🎯 Objetivos de Aprendizado
+
+Durante o desenvolvimento foram praticados:
 
 Criação de API REST com Spring Boot
 
@@ -21,31 +40,42 @@ Integração com PostgreSQL
 
 Execução do banco via Docker
 
-Organização em arquitetura em camadas
+Arquitetura em camadas
 
 🏗️ Estrutura do Projeto
 
-O projeto foi organizado nas seguintes camadas:
+A aplicação foi organizada seguindo o padrão:
 
-Controller → Responsável por receber e responder requisições HTTP
+Controller → Service → Repository → Database
+🔹 Controller
 
-Service → Contém as regras de negócio
+Recebe e responde requisições HTTP.
 
-Repository → Responsável pela comunicação com o banco de dados
+🔹 Service
 
-Model (Entity) → Representação das tabelas
+Contém as regras de negócio e validações.
 
-Essa estrutura foi utilizada para manter o código organizado e separar responsabilidades.
+🔹 Repository
+
+Responsável pela comunicação com o banco via Spring Data JPA.
+
+🔹 Model (Entity)
+
+Representação das tabelas no banco.
+
+Essa organização melhora a manutenção e separa responsabilidades.
 
 🐳 Banco de Dados com Docker
 
-O banco de dados PostgreSQL foi executado via Docker.
+O PostgreSQL foi executado via container Docker para simular um ambiente real de desenvolvimento.
 
-Passos realizados:
+🔧 Passos realizados
 
-Criação do container PostgreSQL
+Criação de uma network Docker
 
-Definição de banco, usuário e senha
+Subida do container PostgreSQL
+
+Configuração de usuário, senha e banco
 
 Exposição da porta 5432
 
@@ -53,11 +83,28 @@ Configuração da conexão no application.yml
 
 O Hibernate está configurado para criar/atualizar as tabelas automaticamente.
 
+🐋 Comandos Docker Utilizados
+Criar a network
+docker network create pedido-network
+Subir o PostgreSQL (versão 16.3)
+docker run --name pedidosdb -p 5432:5432 \
+-e POSTGRES_PASSWORD=postgres \
+-e POSTGRES_USER=postgres \
+-e POSTGRES_DB=Pedidos \
+--network pedido-network \
+postgres:16.3
+Subir o PgAdmin 4
+docker run --name pgadmin4 \
+-e PGADMIN_DEFAULT_EMAIL=admin@gmail.com \
+-e PGADMIN_DEFAULT_PASSWORD=admin \
+-p 15432:80 \
+--network pedido-network \
+dpage/pgadmin4:8.9
 🗂️ Modelagem
 
-O sistema possui duas entidades:
+O sistema possui duas entidades principais:
 
-Cliente
+👤 Cliente
 
 id (UUID)
 
@@ -65,7 +112,7 @@ nome
 
 email
 
-Pedido
+📦 Pedido
 
 id (UUID)
 
@@ -77,11 +124,10 @@ cliente
 
 🔗 Relacionamento
 
-Foi implementado o seguinte relacionamento:
+Foi implementado:
 
-Um Cliente pode ter vários Pedidos
-
-Um Pedido pertence a um único Cliente
+✔ Um Cliente pode ter vários Pedidos
+✔ Um Pedido pertence a um único Cliente
 
 Configurações aplicadas:
 
@@ -92,7 +138,7 @@ FetchType.LAZY
 Chave estrangeira na tabela de Pedido
 
 📡 Funcionalidades
-Cliente
+👤 Cliente
 
 Cadastrar cliente
 
@@ -100,7 +146,7 @@ Listar clientes
 
 Buscar cliente por ID
 
-Pedido
+📦 Pedido
 
 Criar pedido para cliente existente
 
@@ -112,13 +158,13 @@ Deletar pedido
 
 📏 Regras Implementadas
 
-Não é possível criar pedido para cliente inexistente
+✔ Não é possível criar pedido para cliente inexistente
+✔ O valor do pedido deve ser maior que zero
+✔ O email do cliente é único
 
-O valor do pedido deve ser maior que zero
+🧠 Tecnologias Utilizadas
 
-O email do cliente é único
-
-🧠 Conceitos Utilizados
+Java
 
 Spring Boot
 
@@ -126,37 +172,20 @@ Spring Data JPA
 
 Hibernate
 
-UUID
-
-Relacionamentos @OneToMany e @ManyToOne
+PostgreSQL
 
 Docker
 
-PostgreSQL
-
-Arquitetura em camadas
-
 🚀 Como Executar
+1️⃣ Subir o banco via Docker
 
-Subir o banco PostgreSQL via Docker
+Utilize os comandos acima.
 
-Códigos Usado para Criação:
-
-#Comando para criar uma NetWork
-docker network create pedido-network
-
-#Rodar container Postgre na versão 16.3
-docker run --name pedidosdb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=Pedidos --network pedido-network postgres:16.3
-
-#Rodar Pgadmin 4
-docker run --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=admin@gmail.com -e PGADMIN_DEFAULT_PASSWORD=admin -p 15432:80 --network pedido-network dpage/pgadmin4:8.9
-
-Executar a aplicação Spring Boot
-
-Acessar a API em:
-
+2️⃣ Executar a aplicação Spring Boot
+3️⃣ Acessar a API em:
 http://localhost:8080
 👨‍💻 Autor
 
 Gustavo Araujo Pires
+
 Projeto desenvolvido para prática e consolidação de conhecimentos em backend com Java.
