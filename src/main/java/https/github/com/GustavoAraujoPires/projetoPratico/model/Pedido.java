@@ -1,10 +1,9 @@
 package https.github.com.GustavoAraujoPires.projetoPratico.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.UUID;
 
 @Entity
 @Data
@@ -12,12 +11,14 @@ public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long UUID;
+    private UUID id ;
 
     private Data dataPedido;
 
     private Double valorTotal;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_Cliente")
     private Cliente cliente;
 
 
