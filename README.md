@@ -1,8 +1,10 @@
-🚀 Sistema de Pedidos – API REST com Spring Boot + JPA + Docker
+🚀 Sistema de Pedidos
 
-Bem-vindo ao projeto Sistema de Pedidos 👋
+API REST com Spring Boot + JPA + Docker
 
-Uma API REST desenvolvida com Java + Spring Boot, utilizando Spring Data JPA para persistência e PostgreSQL rodando em container Docker.
+📌 Sobre o Projeto
+
+Este projeto é uma API REST desenvolvida com Java + Spring Boot, utilizando Spring Data JPA para persistência de dados e PostgreSQL executado via Docker.
 
 O sistema permite o gerenciamento de:
 
@@ -12,44 +14,38 @@ O sistema permite o gerenciamento de:
 
 Aplicando relacionamento entre entidades e regras básicas de negócio.
 
-📌 Sobre o Projeto
+🎯 Objetivo
 
-Este projeto foi desenvolvido com foco em prática real de backend, simulando uma estrutura comum em aplicações corporativas.
+O projeto foi desenvolvido para praticar:
 
-Ele envolve:
+✔ Criação de API REST
 
-✔ Persistência com JPA
+✔ Mapeamento de entidades com JPA
+
 ✔ Relacionamento entre tabelas
-✔ Banco relacional
-✔ Ambiente isolado com Docker
-✔ Organização em camadas
 
-🎯 Objetivos de Aprendizado
+✔ Uso de UUID como identificador
 
-Durante o desenvolvimento foram praticados:
+✔ Integração com PostgreSQL
 
-Criação de API REST com Spring Boot
+✔ Execução do banco via Docker
 
-Mapeamento de entidades com JPA
-
-Relacionamento entre tabelas
-
-Uso de UUID como identificador
-
-Integração com PostgreSQL
-
-Execução do banco via Docker
-
-Arquitetura em camadas
+✔ Arquitetura em camadas
 
 🏗️ Estrutura do Projeto
 
-A aplicação foi organizada seguindo o padrão:
+A aplicação está organizada da seguinte forma:
 
-Controller → Service → Repository → Database
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+Banco de Dados
 🔹 Controller
 
-Recebe e responde requisições HTTP.
+Responsável por receber e responder requisições HTTP.
 
 🔹 Service
 
@@ -57,53 +53,13 @@ Contém as regras de negócio e validações.
 
 🔹 Repository
 
-Responsável pela comunicação com o banco via Spring Data JPA.
+Comunicação com o banco via Spring Data JPA.
 
 🔹 Model (Entity)
 
-Representação das tabelas no banco.
+Representação das tabelas.
 
-Essa organização melhora a manutenção e separa responsabilidades.
-
-🐳 Banco de Dados com Docker
-
-O PostgreSQL foi executado via container Docker para simular um ambiente real de desenvolvimento.
-
-🔧 Passos realizados
-
-Criação de uma network Docker
-
-Subida do container PostgreSQL
-
-Configuração de usuário, senha e banco
-
-Exposição da porta 5432
-
-Configuração da conexão no application.yml
-
-O Hibernate está configurado para criar/atualizar as tabelas automaticamente.
-
-🐋 Comandos Docker Utilizados
-Criar a network
-docker network create pedido-network
-Subir o PostgreSQL (versão 16.3)
-docker run --name pedidosdb -p 5432:5432 \
--e POSTGRES_PASSWORD=postgres \
--e POSTGRES_USER=postgres \
--e POSTGRES_DB=Pedidos \
---network pedido-network \
-postgres:16.3
-Subir o PgAdmin 4
-docker run --name pgadmin4 \
--e PGADMIN_DEFAULT_EMAIL=admin@gmail.com \
--e PGADMIN_DEFAULT_PASSWORD=admin \
--p 15432:80 \
---network pedido-network \
-dpage/pgadmin4:8.9
 🗂️ Modelagem
-
-O sistema possui duas entidades principais:
-
 👤 Cliente
 
 id (UUID)
@@ -123,8 +79,6 @@ valorTotal
 cliente
 
 🔗 Relacionamento
-
-Foi implementado:
 
 ✔ Um Cliente pode ter vários Pedidos
 ✔ Um Pedido pertence a um único Cliente
@@ -158,10 +112,36 @@ Deletar pedido
 
 📏 Regras Implementadas
 
-✔ Não é possível criar pedido para cliente inexistente
-✔ O valor do pedido deve ser maior que zero
-✔ O email do cliente é único
+Não é possível criar pedido para cliente inexistente
 
+O valor do pedido deve ser maior que zero
+
+O email do cliente é único
+
+🐳 Banco de Dados com Docker
+🔧 Criar network
+docker network create pedido-network
+🗄️ Subir PostgreSQL (16.3)
+docker run --name pedidosdb -p 5432:5432 \
+-e POSTGRES_PASSWORD=postgres \
+-e POSTGRES_USER=postgres \
+-e POSTGRES_DB=Pedidos \
+--network pedido-network \
+postgres:16.3
+🖥️ Subir PgAdmin 4
+docker run --name pgadmin4 \
+-e PGADMIN_DEFAULT_EMAIL=admin@gmail.com \
+-e PGADMIN_DEFAULT_PASSWORD=admin \
+-p 15432:80 \
+--network pedido-network \
+dpage/pgadmin4:8.9
+🚀 Como Executar
+
+1️⃣ Subir o banco com Docker
+2️⃣ Executar a aplicação Spring Boot
+3️⃣ Acessar:
+
+http://localhost:8080
 🧠 Tecnologias Utilizadas
 
 Java
@@ -176,14 +156,6 @@ PostgreSQL
 
 Docker
 
-🚀 Como Executar
-1️⃣ Subir o banco via Docker
-
-Utilize os comandos acima.
-
-2️⃣ Executar a aplicação Spring Boot
-3️⃣ Acessar a API em:
-http://localhost:8080
 👨‍💻 Autor
 
 Gustavo Araujo Pires
