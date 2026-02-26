@@ -18,7 +18,7 @@ public class Cliente {
     @Column(name = "Nome_usuario", nullable = false)
     private String name;
 
-    @Column(name = "Email_usuario",nullable = false)
+    @Column(name = "Email_usuario",nullable = false,unique = true)
     private String email;
 
     @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY)
