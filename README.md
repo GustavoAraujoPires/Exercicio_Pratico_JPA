@@ -31,4 +31,3 @@ API REST simples de gerenciamento de clientes e pedidos, desenvolvida como exerc
 | Lombok                | Reduzir boilerplate                         |
 | UUID                  | Identificador primário das entidades        |
 
-## Estrutura do Projeto (resumida)
