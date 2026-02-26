@@ -22,10 +22,10 @@ API REST simples de gerenciamento de clientes e pedidos, desenvolvida como exerc
 
 | Tecnologia            | Versão / Propósito                          |
 |-----------------------|---------------------------------------------|
-| Java                  | 17 ou 21                                    |
-| Spring Boot           | 3.x                                         |
+| Java                  | 21                                          |
+| Spring Boot           | 4.0.3                                       |
 | Spring Data JPA       | Hibernate como provedor                     |
-| PostgreSQL            | 15 / 16 (via Docker)                        |
+| PostgreSQL            | 16 (via Docker)                             |
 | Docker                | Containerização do banco                    |
 | Maven                 | Gerenciamento de dependências               |
 | Lombok                | Reduzir boilerplate                         |
