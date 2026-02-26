@@ -1,6 +1,8 @@
 package https.github.com.GustavoAraujoPires.projetoPratico.service;
 
+import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Pedido;
+import https.github.com.GustavoAraujoPires.projetoPratico.repository.ClienteRepository;
 import https.github.com.GustavoAraujoPires.projetoPratico.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,13 @@ public class PedidoService {
     @Autowired
     private PedidoRepository repository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     public Pedido salvarPedido(Pedido pedido){
+        UUID clienteId = pedido.getCliente().getId();
+        Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new RuntimeException("Cliente não encontrado !!!"));
+        pedido.setCliente(cliente);
         return repository.save(pedido);
     }
 
