@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class Pedido {
 
     private LocalDate dataPedido;
 
-    private Double valorTotal;
+    private BigDecimal valorTotal;
 
     @ManyToOne
     @JoinColumn(name = "id_Cliente")

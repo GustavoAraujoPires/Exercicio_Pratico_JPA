@@ -23,7 +23,8 @@ public class PedidoController {
     @PostMapping
     public Pedido savarPedido(@RequestBody Pedido pedido){
         UUID id = pedido.getCliente().getId();
-        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado !!"));
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Cliente não encontrado !!"));
         pedido.setCliente(cliente);
         return service.salvarPedido(pedido);
     }

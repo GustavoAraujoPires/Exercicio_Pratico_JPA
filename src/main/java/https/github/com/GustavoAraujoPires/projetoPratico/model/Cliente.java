@@ -17,7 +17,6 @@ public class Cliente {
     @Column(name = "ID_usuario",unique = true)
     private UUID id;
 
-
     private String name;
 
     @Column(unique = true)
