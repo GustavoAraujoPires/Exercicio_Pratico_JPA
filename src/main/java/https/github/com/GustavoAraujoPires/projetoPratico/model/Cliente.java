@@ -22,6 +22,9 @@ public class Cliente {
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
+    private String cpf;
+
     @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Pedido> listaDePedidos;
