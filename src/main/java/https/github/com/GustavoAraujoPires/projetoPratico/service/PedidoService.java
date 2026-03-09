@@ -2,6 +2,7 @@ package https.github.com.GustavoAraujoPires.projetoPratico.service;
 
 import https.github.com.GustavoAraujoPires.projetoPratico.dto.PedidoDTO;
 import https.github.com.GustavoAraujoPires.projetoPratico.exception.PedidoInvalidoException;
+import https.github.com.GustavoAraujoPires.projetoPratico.exception.PedidoNaoEncontradoPorIdException;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Pedido;
 import https.github.com.GustavoAraujoPires.projetoPratico.repository.ClienteRepository;
@@ -22,7 +23,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PedidoService {
 
-
     private PedidoRepository repository;
 
     private ClienteRepository clienteRepository;
@@ -34,7 +34,6 @@ public class PedidoService {
 //            throw -> lança erro e para execução
         }else
             return repository.save(pedido);
-
     }
 
     public List<Pedido> buscarTodosPedido(){
@@ -42,7 +41,8 @@ public class PedidoService {
     }
 
     public Pedido buscarPedidoPorId(UUID id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(
+                () -> new PedidoNaoEncontradoPorIdException());
     }
 
     public void deletarPedido(UUID id){
