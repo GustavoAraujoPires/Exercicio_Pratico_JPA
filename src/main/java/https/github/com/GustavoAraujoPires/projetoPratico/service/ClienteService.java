@@ -7,6 +7,7 @@ import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,8 +36,10 @@ public class ClienteService {
 //        () -> é uma lambda, que só cria a exception se o valor não existir.
     }
 
-    public void deletarCliente(UUID id){
-        repository.deleteById(id);
+    @Transactional
+    public void deletarCliente(String cpf){
+        if(!repository.existsByCpf(cpf)){
+            throw new ClienteNaoEncontradoException();
+        } repository.deleteByCpf(cpf);
     }
-
 }

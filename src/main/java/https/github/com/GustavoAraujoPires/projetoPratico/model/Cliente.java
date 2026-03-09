@@ -11,7 +11,6 @@ import java.util.UUID;
 @Entity
 @Data
 public class Cliente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "ID_usuario",unique = true)
@@ -28,5 +27,4 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Pedido> listaDePedidos;
-
 }

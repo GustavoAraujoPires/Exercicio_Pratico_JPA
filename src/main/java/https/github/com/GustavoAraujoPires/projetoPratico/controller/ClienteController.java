@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("clientes")
 public class ClienteController {
 
     @Autowired
@@ -33,8 +33,8 @@ public class ClienteController {
         return service.buscarClientePorId(id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletarCliente(@PathVariable UUID id){
-        service.deletarCliente(id);
+    @DeleteMapping("/{cpf}")
+    public void deletarCliente(@PathVariable String cpf){
+        service.deletarCliente(cpf);
     }
 }
