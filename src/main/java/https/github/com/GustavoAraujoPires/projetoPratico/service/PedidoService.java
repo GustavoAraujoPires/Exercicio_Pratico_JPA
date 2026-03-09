@@ -3,14 +3,10 @@ package https.github.com.GustavoAraujoPires.projetoPratico.service;
 import https.github.com.GustavoAraujoPires.projetoPratico.dto.PedidoDTO;
 import https.github.com.GustavoAraujoPires.projetoPratico.exception.PedidoInvalidoException;
 import https.github.com.GustavoAraujoPires.projetoPratico.exception.PedidoNaoEncontradoPorIdException;
-import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Pedido;
-import https.github.com.GustavoAraujoPires.projetoPratico.repository.ClienteRepository;
 import https.github.com.GustavoAraujoPires.projetoPratico.repository.PedidoRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,13 +15,10 @@ import java.util.UUID;
 
 
 @Service
-@NoArgsConstructor
 @AllArgsConstructor
 public class PedidoService {
 
     private PedidoRepository repository;
-
-    private ClienteRepository clienteRepository;
 
     public Pedido salvarPedido(PedidoDTO pedidoDTO){
         Pedido pedido = pedidoDTO.toEntityPedido();
@@ -46,7 +39,9 @@ public class PedidoService {
     }
 
     public void deletarPedido(UUID id){
+        if(!repository.existsById(id)){
+            throw new PedidoNaoEncontradoPorIdException();
+        }
         repository.deleteById(id);
     }
-
 }

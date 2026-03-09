@@ -14,14 +14,14 @@ public class PedidoDTO {
     private String nomePedido;
     private LocalDate dataPedido;
     private BigDecimal valorTotal;
-    private Cliente cliente;
+    private Cliente id_Cliente;
 
     public Pedido toEntityPedido(){
         Pedido pedido = new Pedido();
         pedido.setNomePedido(this.nomePedido);
         pedido.setDataPedido(this.dataPedido);
         pedido.setValorTotal(this.valorTotal);
-        pedido.setCliente(this.cliente);
+        pedido.setCliente(this.id_Cliente);
 
         return pedido;
 
