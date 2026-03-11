@@ -32,7 +32,7 @@ public class ClienteService {
 
     public Cliente buscarClientePorId(UUID id){
         return repository.findById(id)
-                .orElseThrow(() -> new ClienteNaoEncontradoException());
+                .orElseThrow(ClienteNaoEncontradoException::new);
 //        () -> é uma lambda, que só cria a exception se o valor não existir.
     }
 

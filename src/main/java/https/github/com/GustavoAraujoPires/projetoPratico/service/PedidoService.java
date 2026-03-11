@@ -33,7 +33,7 @@ public class PedidoService {
         }
 
         Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId())
-                .orElseThrow(() -> new ClienteNaoEncontradoException());
+                .orElseThrow(ClienteNaoEncontradoException :: new);
 
         pedido.setCliente(cliente);
 

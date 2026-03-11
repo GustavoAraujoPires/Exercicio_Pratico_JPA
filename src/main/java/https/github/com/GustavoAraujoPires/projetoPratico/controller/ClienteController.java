@@ -4,10 +4,8 @@ import https.github.com.GustavoAraujoPires.projetoPratico.dto.ClienteDTO;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
