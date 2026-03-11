@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Data
@@ -14,16 +15,13 @@ public class PedidoDTO {
     private String nomePedido;
     private LocalDate dataPedido;
     private BigDecimal valorTotal;
-    private Cliente id_Cliente;
+    private UUID ClienteId;
 
     public Pedido toEntityPedido(){
         Pedido pedido = new Pedido();
         pedido.setNomePedido(this.nomePedido);
         pedido.setDataPedido(this.dataPedido);
         pedido.setValorTotal(this.valorTotal);
-        pedido.setCliente(this.id_Cliente);
-
         return pedido;
-
     }
 }

@@ -1,9 +1,12 @@
 package https.github.com.GustavoAraujoPires.projetoPratico.service;
 
 import https.github.com.GustavoAraujoPires.projetoPratico.dto.PedidoDTO;
+import https.github.com.GustavoAraujoPires.projetoPratico.exception.ClienteNaoEncontradoException;
 import https.github.com.GustavoAraujoPires.projetoPratico.exception.PedidoInvalidoException;
 import https.github.com.GustavoAraujoPires.projetoPratico.exception.PedidoNaoEncontradoPorIdException;
+import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Pedido;
+import https.github.com.GustavoAraujoPires.projetoPratico.repository.ClienteRepository;
 import https.github.com.GustavoAraujoPires.projetoPratico.repository.PedidoRepository;
 import lombok.AllArgsConstructor;
 
@@ -19,13 +22,21 @@ import java.util.UUID;
 public class PedidoService {
 
     private PedidoRepository repository;
+    private ClienteRepository clienteRepository;
 
     public Pedido salvarPedido(PedidoDTO pedidoDTO){
         Pedido pedido = pedidoDTO.toEntityPedido();
+
         if(pedido.getValorTotal().compareTo(BigDecimal.ZERO) <= 0){
             throw new PedidoInvalidoException();
 //            throw -> lança erro e para execução
-        }else
+        }
+
+        Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId())
+                .orElseThrow(() -> new ClienteNaoEncontradoException());
+
+        pedido.setCliente(cliente);
+
             return repository.save(pedido);
     }
 
