@@ -1,104 +1,185 @@
-# 🚀 Sistema de Pedidos – API REST com Spring Boot + JPA + Docker
+📦 API de Clientes e Pedidos
 
-API REST para gerenciamento de Clientes e Pedidos  
-Desenvolvida com **Java**, **Spring Boot**, **Spring Data JPA**, **PostgreSQL** e **Docker**
+API REST desenvolvida em Java utilizando Spring Boot para gerenciamento de clientes e pedidos.
 
-## 📌 Descrição
+Este projeto foi desenvolvido com o objetivo de praticar boas práticas de desenvolvimento backend, incluindo:
 
-Este projeto consiste em uma API REST desenvolvida com Java e Spring Boot, utilizando Spring Data JPA para persistência de dados e PostgreSQL como banco de dados, executado em um container Docker.
+Arquitetura em camadas
 
-O sistema permite o gerenciamento de **Clientes** e **Pedidos**, aplicando relacionamento entre entidades e regras básicas de negócio.
+Uso de DTOs
 
-## 🎯 Objetivo
+Tratamento de exceções
 
-O objetivo do projeto foi praticar:
+Regras de negócio na camada de serviço
 
-- Criação de API REST com Spring Boot
-- Mapeamento de entidades com JPA
-- Relacionamento entre tabelas
-- Uso de **UUID** como identificador
-- Integração com PostgreSQL
-- Execução do banco via Docker
-- Organização em **arquitetura em camadas**
+Persistência de dados com Spring Data JPA
 
-## 🏗️ Estrutura do Projeto
+Banco de dados em container utilizando Docker
 
-O projeto foi organizado nas seguintes camadas:
+🚀 Tecnologias Utilizadas
 
-- **Controller** → Responsável por receber e responder requisições HTTP
-- **Service** → Contém as regras de negócio
-- **Repository** → Responsável pela comunicação com o banco de dados
-- **Model (Entity)** → Representação das tabelas
+Java 17+
 
-Essa estrutura foi utilizada para manter o código organizado e separar responsabilidades.
+Spring Boot
 
-## 🐳 Banco de Dados com Docker
+Spring Data JPA
 
-O banco de dados PostgreSQL foi executado via Docker.
+Hibernate ORM
 
-Passos realizados:
+PostgreSQL
 
-- Criação do container PostgreSQL
-- Definição de banco, usuário e senha
-- Exposição da porta 5432
-- Configuração da conexão no `application.yml`
+Docker
 
-O Hibernate está configurado para **criar/atualizar** as tabelas automaticamente.
+pgAdmin 4
 
-## 🗂️ Modelagem
+Lombok
 
-Entidades do sistema:
+Maven
 
-**Cliente**
-- id (UUID)
-- nome
-- email
+📁 Estrutura do Projeto
 
-**Pedido**
-- id (UUID)
-- dataPedido
-- valorTotal
-- cliente
+O projeto segue uma arquitetura em camadas para manter o código organizado e de fácil manutenção.
 
-## 🔗 Relacionamento
+src/main/java
+│
+├── controller      → Recebe as requisições HTTP
+├── service         → Contém as regras de negócio
+├── repository      → Acesso ao banco de dados
+├── model           → Entidades do sistema
+├── dto             → Objetos de transferência de dados
+├── exception       → Exceções personalizadas
+└── handler         → Tratamento global de exceções
 
-- Um **Cliente** pode ter **vários Pedidos**
-- Um **Pedido** pertence a **um único Cliente**
+Essa separação melhora:
 
-Configurações aplicadas:
-- Relacionamento **bidirecional**
-- **FetchType.LAZY**
-- Chave estrangeira na tabela de **Pedido**
+manutenção do código
 
-## 📡 Funcionalidades
+organização do projeto
 
-### Cliente
-- Cadastrar cliente
-- Listar clientes
-- Buscar cliente por ID
+escalabilidade da aplicação
 
-### Pedido
-- Criar pedido para cliente existente
-- Listar pedidos
-- Listar pedidos por cliente
-- Deletar pedido
+🧠 Modelagem do Sistema
 
-## 📏 Regras Implementadas
+O sistema possui duas entidades principais:
 
-- Não é possível criar pedido para cliente inexistente
-- O valor do pedido deve ser maior que zero
-- O email do cliente é único
+Cliente
 
-## 🧠 Conceitos Utilizados
+id
 
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- UUID
-- Relacionamentos **@OneToMany** e **@ManyToOne**
-- Docker
-- PostgreSQL
-- Arquitetura em camadas
+nome
+
+email
+
+cpf
+
+Pedido
+
+id
+
+nomePedido
+
+dataPedido
+
+valorTotal
+
+cliente
+
+Relacionamento
+Cliente 1 → N Pedido
+
+Um cliente pode possuir vários pedidos.
+
+🌐 Endpoints da API
+Clientes
+Criar cliente
+
+POST
+
+/clientes
+
+Exemplo de requisição:
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "cpf": "12345678900"
+}
+Buscar cliente por ID
+
+GET
+
+/clientes/{id}
+Deletar cliente
+
+DELETE
+
+/clientes/{cpf}
+Pedidos
+Criar pedido
+
+POST
+
+/pedidos
+
+Exemplo:
+
+{
+  "nomePedido": "Notebook",
+  "dataPedido": "2026-03-11",
+  "valorTotal": 2500,
+  "clienteId": "uuid-do-cliente"
+}
+Listar pedidos
+
+GET
+
+/pedidos
+Buscar pedido por ID
+
+GET
+
+/pedidos/{id}
+Deletar pedido
+
+DELETE
+
+/pedidos/{id}
+🧩 Regras de Negócio
+
+O sistema possui algumas validações importantes:
+
+Não é permitido cadastrar cliente com email já existente
+
+Não é permitido cadastrar cliente com CPF duplicado
+
+O valor do pedido deve ser maior que zero
+
+Um pedido só pode ser criado se o cliente existir
+
+Exceções personalizadas são utilizadas para retornar erros claros
+
+⚠️ Tratamento de Erros
+
+A aplicação utiliza um Global Exception Handler para tratar erros e retornar respostas padronizadas.
+
+Exemplo de resposta de erro:
+
+{
+  "erro": "Cliente não encontrado"
+}
+📚 Boas Práticas Utilizadas
+
+Arquitetura em camadas
+
+DTO para entrada de dados
+
+Exceptions customizadas
+
+Separação de responsabilidades
+
+Uso de UUID como identificador
+
+Regras de negócio na camada Service
 
 ## 🚀 Como Executar
 
