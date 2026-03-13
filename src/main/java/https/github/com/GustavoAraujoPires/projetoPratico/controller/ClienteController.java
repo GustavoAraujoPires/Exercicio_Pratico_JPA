@@ -3,7 +3,7 @@ package https.github.com.GustavoAraujoPires.projetoPratico.controller;
 import https.github.com.GustavoAraujoPires.projetoPratico.dto.ClienteDTO;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("clientes")
+@AllArgsConstructor
 public class ClienteController {
 
-    @Autowired
     private ClienteService service;
 
     @PostMapping

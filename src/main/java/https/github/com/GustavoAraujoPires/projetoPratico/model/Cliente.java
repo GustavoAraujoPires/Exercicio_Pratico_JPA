@@ -1,10 +1,7 @@
 package https.github.com.GustavoAraujoPires.projetoPratico.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-
-
 import java.util.List;
 import java.util.UUID;
 

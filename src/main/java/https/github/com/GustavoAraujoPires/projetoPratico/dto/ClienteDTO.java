@@ -3,7 +3,6 @@ package https.github.com.GustavoAraujoPires.projetoPratico.dto;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import lombok.Data;
 
-
 @Data
 public class ClienteDTO {
 

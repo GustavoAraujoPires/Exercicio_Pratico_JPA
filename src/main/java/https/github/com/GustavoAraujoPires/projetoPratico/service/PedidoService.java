@@ -29,7 +29,7 @@ public class PedidoService {
 
         if(pedido.getValorTotal().compareTo(BigDecimal.ZERO) <= 0){
             throw new PedidoInvalidoException();
-//            throw -> lança erro e para execução
+//            throw -> lança erro em execução
         }
 
         Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId())

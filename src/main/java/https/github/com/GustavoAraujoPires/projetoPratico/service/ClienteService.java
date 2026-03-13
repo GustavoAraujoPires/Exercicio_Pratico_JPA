@@ -5,7 +5,7 @@ import https.github.com.GustavoAraujoPires.projetoPratico.exception.ClienteJaExi
 import https.github.com.GustavoAraujoPires.projetoPratico.exception.ClienteNaoEncontradoException;
 import https.github.com.GustavoAraujoPires.projetoPratico.model.Cliente;
 import https.github.com.GustavoAraujoPires.projetoPratico.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class ClienteService {
 
-    @Autowired
     ClienteRepository repository;
 
     public List<Cliente> buscarTodosClientes(){
